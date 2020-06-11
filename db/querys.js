@@ -15,5 +15,31 @@ db.connect((err) => {
   }
 });
 
+db.create = (task) => {
+  return new Promise((resolve, reject) => {
+    db.query(`INSERT INTO todoList (task) VALUES ('${task}')`, (err, result) => {
+      if(err) {
+        console.log('Failed to insert task', err)
+        reject(err)
+      } else {
+        resolve(result);
+      }
+    })
+  })
+}
+
+db.getAll = () => {
+  return new Promise((resolve, reject) => {
+    db.query(`SELECT * FROM todoList`, (err, result) => {
+      if(err) {
+        console.log('Failed to get tasks', err);
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    })
+  })
+}
+
 module.exports = db;
 
