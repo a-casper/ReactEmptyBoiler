@@ -25,7 +25,34 @@ db.create = (task) => {
         resolve(result);
       }
     })
-  })
+  });
+}
+
+db.delete = (id) => {
+  return new Promise((resolve, reject) => {
+    db.query(`DELETE FROM todoList WHERE id = ${id}`, (err, result) => {
+      if(err) {
+        console.log('Failed to delete todo', err);
+        reject(err);
+      } else {
+        resolve(result);
+      }
+    })
+  });
+}
+
+db.update = (id, newTask) => {
+  return new Promise ((resolve, reject) => {
+    db.query(`UPDATE todoList SET task = "${newTask}" WHERE id = ${id}`, (err, result) => {
+      if(err) {
+        console.log('Failed to update todo', err);
+        reject(err);
+      } else {
+        console.log('updated that Todo')
+        resolve(result);
+      }
+    })
+  });
 }
 
 db.getAll = () => {
@@ -38,8 +65,9 @@ db.getAll = () => {
         resolve(result);
       }
     })
-  })
+  });
 }
+
 
 module.exports = db;
 

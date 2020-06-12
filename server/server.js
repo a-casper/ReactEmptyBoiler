@@ -31,9 +31,26 @@ app.post('/submitTodo', (req, res) => {
   db.create(req.body.task).then(result => {
     res.status(200).send(result);
   }).catch(err => {
-    res.sendStatus(500)
+    res.sendStatus(500);
   })
 });
+
+app.delete('/deleteTodo', (req, res) => {
+  db.delete(req.query.id).then(result => {
+    res.status(200).send(result);
+  }).catch(err => {
+    res.sendStatus(500);
+  })
+})
+
+app.put('/updateTodo', (req, res) => {
+  db.update(req.body.id, req.body.task).then(result => {
+    res.status(200).send(result);
+  }).catch(err => {
+    res.sendStatus(500);
+  })
+})
+
 
 //listen
 app.listen(port, () => {
